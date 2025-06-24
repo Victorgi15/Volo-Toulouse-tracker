@@ -1,4 +1,6 @@
 requests
 pandas
 pygwalker
-python-dotenv 
+python-dotenv
+matplotlib
+numpy 
