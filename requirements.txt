@@ -3,4 +3,5 @@ pandas
 pygwalker
 python-dotenv
 matplotlib
-numpy 
+numpy
+folium 
