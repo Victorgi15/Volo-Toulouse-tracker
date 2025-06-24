@@ -80,7 +80,7 @@ features = []
 for _, row in filled_df.iterrows():
     if pd.isna(row["latitude"]) or pd.isna(row["longitude"]) or pd.isna(row["bikes"]):
         continue
-    color = color_scale(row["bikes"], vmin, vmax)
+    color = color_scale(row["bikes"], min_bikes, max_bikes)
     feature = {
         "type": "Feature",
         "geometry": {
