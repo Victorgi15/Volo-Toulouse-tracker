@@ -1,0 +1,30 @@
+import os
+import requests
+import pandas as pd
+from dotenv import load_dotenv
+from datetime import datetime
+
+# Charger les variables d'environnement
+load_dotenv()
+API_KEY = os.getenv("JCDECAUX_API_KEY")
+CONTRACT = os.getenv("JCDECAUX_CONTRACT")
+
+# Récupération des données des stations
+url = f"https://api.jcdecaux.com/vls/v3/stations?contract={CONTRACT}&apiKey={API_KEY}"
+response = requests.get(url)
+stations = response.json()
+
+# Transformation en DataFrame
+stations_df = pd.DataFrame(stations)
+
+# Ajout du timestamp
+stations_df["snapshot_time"] = datetime.now().isoformat()
+
+# Enregistrement dans le CSV (ajout ou création)
+history_file = "stations_history.csv"
+if not os.path.isfile(history_file):
+    stations_df.to_csv(history_file, index=False)
+else:
+    stations_df.to_csv(history_file, mode="a", header=False, index=False)
+
+print(f"Snapshot enregistré à {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
