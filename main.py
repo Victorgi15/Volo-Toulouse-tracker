@@ -1,8 +1,8 @@
+import os
+from dotenv import load_dotenv
 import requests
 import pandas as pd
 import pygwalker as pyg
-import os
-from dotenv import load_dotenv
 
 # Charger les variables d'environnement
 load_dotenv()
@@ -10,7 +10,9 @@ API_KEY = os.getenv("JCDECAUX_API_KEY")
 CONTRACT = os.getenv("JCDECAUX_CONTRACT")
 
 # Récupération des données des stations
-url = f"https://api.jcdecaux.com/vls/v3/stations?contract={CONTRACT}&apiKey={API_KEY}"
+base_url = "https://api.jcdecaux.com/vls/v3/stations"
+params = f"?contract={CONTRACT}&apiKey={API_KEY}"
+url = base_url + params
 response = requests.get(url)
 stations = response.json()
 

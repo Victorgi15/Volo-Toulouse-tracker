@@ -1,7 +1,7 @@
 import os
+from dotenv import load_dotenv
 import requests
 import pandas as pd
-from dotenv import load_dotenv
 from datetime import datetime
 
 # Charger les variables d'environnement
@@ -10,7 +10,9 @@ API_KEY = os.getenv("JCDECAUX_API_KEY")
 CONTRACT = os.getenv("JCDECAUX_CONTRACT")
 
 # Récupération des données des stations
-url = f"https://api.jcdecaux.com/vls/v3/stations?contract={CONTRACT}&apiKey={API_KEY}"
+base_url = "https://api.jcdecaux.com/vls/v3/stations"
+params = f"?contract={CONTRACT}&apiKey={API_KEY}"
+url = base_url + params
 response = requests.get(url)
 stations = response.json()
 
@@ -28,3 +30,4 @@ else:
     stations_df.to_csv(history_file, mode="a", header=False, index=False)
 
 print(f"Snapshot enregistré à {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+a = "Ceci est une ligne de test qui fait exactement quatre-vingt-huit caractères, véri"
