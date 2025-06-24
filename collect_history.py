@@ -4,6 +4,8 @@ import requests
 import pandas as pd
 from datetime import datetime
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Charger les variables d'environnement
 load_dotenv()
 API_KEY = os.getenv("JCDECAUX_API_KEY")
@@ -23,11 +25,10 @@ stations_df = pd.DataFrame(stations)
 stations_df["snapshot_time"] = datetime.now().isoformat()
 
 # Enregistrement dans le CSV (ajout ou création)
-history_file = "stations_history.csv"
+history_file = os.path.join(BASE_DIR, "stations_history.csv")
 if not os.path.isfile(history_file):
     stations_df.to_csv(history_file, index=False)
 else:
     stations_df.to_csv(history_file, mode="a", header=False, index=False)
 
 print(f"Snapshot enregistré à {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-a = "Ceci est une ligne de test qui fait exactement quatre-vingt-huit caractères, véri"

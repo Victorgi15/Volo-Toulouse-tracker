@@ -4,6 +4,8 @@ import requests
 import pandas as pd
 import pygwalker as pyg
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Charger les variables d'environnement
 load_dotenv()
 API_KEY = os.getenv("JCDECAUX_API_KEY")
